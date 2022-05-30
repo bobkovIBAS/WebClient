@@ -1,5 +1,67 @@
-<div class="container">
-  <header class="jumbotron">
-    <p>{{ content }}</p>
-  </header>
+<div class="container-fluid bg-primary pt-5 pb-5">
+  <div class="container">
+    <img src="assets/image/airFlight.png" class="mx-auto" style="width: 90%;" alt="Адаптивные изображения">
+    <h4 class="text-center text-white">Выберите полет</h4>
+    <table class="table table-hover bg-white">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Откуда</th>
+          <th scope="col">Куда</th>
+          <th scope="col">Самолет</th>
+          <th scope="col">Количество мест</th>
+          <th scope="col">Дата полета</th>
+          <th scope="col">Стоимость билета</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flight of flightData; index as i">
+          <th scope="row">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+              (change)="onCheckChange($event)" [value]="flight?.id">
+            </div>
+          </th>
+          <td>{{ flight?.fromId?.name }}</td>
+          <td>{{ flight?.toId?.name }}</td>
+          <td>{{ flight?.planeTypes }}</td>
+          <td>{{ flight?.freePlaces }}</td>
+          <td>{{ flight?.dateFlights }}</td>
+          <td>{{ flight?.sumTicket }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-warning btn-block" (click)="selectFligth()">Выбрать</button>
+  </div>
 </div>
+<div class="container pt-5" *ngIf="showRegistartionFlight">
+  <h5 class="text-center">Регистрация на полеты</h5>
+  <form>
+    <div class="form-group">
+      <label for="exampleInputFamily">Фамилия</label>
+      <input type="text" name="surname" class="form-control" placeholder="Фамилия" [(ngModel)]="loginForm.surname" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputName">Имя</label>
+      <input type="text" name="name" class="form-control" placeholder="Имя" [(ngModel)]="loginForm.name" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassport">Паспорт</label>
+      <input type="text" name="passport" class="form-control" placeholder="Паспорт" [(ngModel)]="loginForm.passport" required>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="createFlightData()">Забронировать</button>
+  </form>
+</div>
+<div class="container pt-5" *ngIf="showStaticText">
+  <h5 class="text-center">Куда полететь? Когда билеты на самолёт дешевле? Как отслеживать цены на авиабилеты?</h5>
+  <p class="pt-5">Выберите направление и даты с самым дешёвым перелётом на карте или календаре низких цен, а в личном кабинете вас ждут конкурсы и эксклюзивные скидки от партнёров.</p>
+</div>
+<div class="container pt-5" *ngIf="showRegistartionFlightDone">
+  <h5 class="text-center">Вы успешно зарегестрировались на полет</h5>
+  <p>Откуда</p>
+  <p>Куда</p>
+  <p>Самолет</p>
+  <p>Дата полета</p>
+</div>
+
+
