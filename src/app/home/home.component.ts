@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 
 import { CreateUser } from '../_services/guestcard-create';
-import { PossibleFlights } from '../_services/possibleFlights';
+import { PossibleFlights } from '../_services/possibleFlightInterface';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
 

@@ -1,5 +1,5 @@
 import { GuestCard } from "./guestCard";
-import { PossibleFlights } from "./possibleFlights";
+import { PossibleFlights } from "./possibleFlightInterface";
 
 export interface FlightData {
     id: string;

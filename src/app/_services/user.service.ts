@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CreateUser } from './guestcard-create';
-import { PossibleFlights } from './possibleFlights';
+import { PossibleFlights } from './possibleFlightInterface';
 import { FlightData } from './flightsData';
+import { CityData } from './city';
+import { PossibleFlightsData } from './possibleFlights';
 
-const API_URL = 'http://localhost:8080/methods/';
+const API_URL = 'http://localhost:8080/api/user/';
+const API_ADMIN = 'http://localhost:8080/api/admin/';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,12 @@ export class UserService {
   getPublicContent(): Observable<PossibleFlights[]> {
     return this.http.get<PossibleFlights[]>(API_URL + 'getAllPossibleFlights');
   }
-
+  createPossibleFlight(possibleFlight:PossibleFlightsData):Observable<any>{
+    return this.http.post(API_ADMIN+"newflight/", possibleFlight);
+  }
+  getAllCity(): Observable<CityData[]> {
+    return this.http.get<CityData[]>(API_URL + 'getallcity');
+  }
   saveFlightData(id:string,user:CreateUser): Observable<any>{
     return  this.http.post(API_URL+"registration/"+id, user);
   }

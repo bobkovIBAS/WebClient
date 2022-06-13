@@ -1,5 +1,87 @@
 <div class="container">
   <header class="jumbotron">
-    <p>{{ content }}</p>
+    <form>
+      <div class="form-group">
+        <label for="cityFrom">Куда</label>
+        <select id="cityFrom" class="form-control" [(ngModel)]="cityFromValue" name="cityFromValue">
+          <option *ngFor="let city of cityFrom" [value]="city?.id" >
+            {{city?.name}}
+        </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cityOut">Откуда</label>
+        <select id="cityOut" class="form-control" [(ngModel)]="cityToValue" name="cityToValue">
+          <option *ngFor="let cityto of cityTo" [value]="cityto?.id">
+            {{cityto?.name}}
+        </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="planeTypes">Введите наименование самолета</label>
+        <input type="text" class="form-control" id="planeTypes" placeholder="Ту145" [(ngModel)]="possibleFlightForm.planeTypes" name="planeTypes" [attr.disabled]="disabledData">
+      </div>
+      <div class="form-group">
+        <label for="freePlaces">Введите количество посадочных мест</label>
+        <input type="text" class="form-control" id="freePlaces" placeholder="1" [(ngModel)]="possibleFlightForm.freePlaces" name="freePlaces" [attr.disabled]="disabledData">
+      </div>
+      <div class="form-group">
+        <label for="freePlaces">Введите сумму полета</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="possibleFlightForm.sumTicket" name ="sumTicket" [attr.disabled]="disabledData">
+          <div class="input-group-append">
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="date" id="time" [(ngModel)]="possibleFlightForm.dateFlights" name="dateFlights" [attr.disabled]="disabledData">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-secondary" (click)="anyFlightParams()" >Дополнительные параметры полета</button>
+      </div>
+      <div class="form-group" *ngIf="showAnyFlightParams">
+      <div class="form-group">
+        <label for="timeStart">Выберите дату начала</label>
+        <input type="date" id="timeStart" [(ngModel)]="possibleFlightDate.dateFlights" name="dateFlightsStart">
+      </div>
+      <div class="form-group">
+        <label for="cityFrom">Выберите день недели</label>
+        <select id="cityFrom" class="form-control" [(ngModel)]="possibleFlightDate.dayWeek" name="cityFromValue">
+          <option *ngFor="let name of req; index as i" [value]="name.week" >
+            {{name.name}}
+        </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="timeEnd">Выберите дату конца</label>
+        <input type="date" id="timeEnd" [(ngModel)]="possibleFlightDate.dateEndFlight"  name="dateFlightsEnd">
+      </div>
+      <div class="form-group">
+        <label for="planeTypes">Введите наименование самолета</label>
+        <input type="text" class="form-control" id="planeTypes" placeholder="Ту145" [(ngModel)]="possibleFlightDate.planeTypes" name="planeTypes">
+      </div>
+      <div class="form-group">
+        <label for="freePlaces">Введите количество посадочных мест</label>
+        <input type="text" class="form-control" id="freePlaces" placeholder="1" [(ngModel)]="possibleFlightDate.freePlaces" name="freePlaces">
+      </div>
+      <div class="form-group">
+        <label for="freePlaces">Введите сумму полета</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="possibleFlightDate.sumTicket" name ="sumTicket">
+          <div class="input-group-append">
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+      <button type="submit" class="btn btn-primary" (click)="createPossibleFlight()" >Создать полет</button>
+    </form>
   </header>
 </div>

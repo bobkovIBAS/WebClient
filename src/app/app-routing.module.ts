@@ -9,17 +9,20 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { FlightComponent } from './flights/flights.component';
+import { BoardAdminCityComponent } from './board-admin-city/boad-admin-city.component';
+import { AuthGuard } from './_services/auth.active';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'myflights', component: FlightComponent },
+  { path: 'myflights', component: FlightComponent, canActivate:[AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'user', component: BoardUserComponent },
-  { path: 'mod', component: BoardModeratorComponent },
-  { path: 'admin', component: BoardAdminComponent },
+  { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard] },
+  { path: 'user', component: BoardUserComponent, canActivate:[AuthGuard] },
+  { path: 'mod', component: BoardModeratorComponent, canActivate:[AuthGuard] },
+  { path: 'adminflight', component: BoardAdminComponent, canActivate:[AuthGuard] },
+  { path: 'admincity', component: BoardAdminCityComponent, canActivate:[AuthGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
