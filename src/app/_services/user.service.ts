@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { CreateUser } from './guestcard-create';
 import { PossibleFlights } from './possibleFlightInterface';
 import { FlightData } from './flightsData';
-import { CityData } from './city';
+import { CityData } from './city.interface';
 import { PossibleFlightsData } from './possibleFlights';
+import { City } from './city.model';
 
 const API_URL = 'http://localhost:8080/api/user/';
 const API_ADMIN = 'http://localhost:8080/api/admin/';
@@ -21,6 +22,9 @@ export class UserService {
   }
   createPossibleFlight(possibleFlight:PossibleFlightsData):Observable<any>{
     return this.http.post(API_ADMIN+"newflight/", possibleFlight);
+  }
+  createCity(city:City): Observable<any>{
+    return  this.http.post(API_ADMIN+"newcity/", city);
   }
   getAllCity(): Observable<CityData[]> {
     return this.http.get<CityData[]>(API_URL + 'getallcity');

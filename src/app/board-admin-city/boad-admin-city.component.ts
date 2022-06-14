@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { City } from "../_services/city.model";
 import { UserService } from "../_services/user.service";
 
 @Component({
@@ -19,7 +20,14 @@ import { UserService } from "../_services/user.service";
     }
 
     createCity(): void{
-        
+      this.userService.createCity(new City(this.cityForm.cityName,parseInt(this.cityForm.cityRegion))).subscribe(
+        (data: any) => {
+          this.cityForm = "";
+          alert("создано");
+          
+        },
+        error => console.log(error)
+    );
     }
 
   }

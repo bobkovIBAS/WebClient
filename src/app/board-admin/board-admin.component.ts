@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CityData } from '../_services/city';
+import { CityData } from '../_services/city.interface';
 import { PossibleFlightDate } from '../_services/possibleFlightDate';
 import { PossibleFlightsData } from '../_services/possibleFlights';
 import { UserService } from '../_services/user.service';

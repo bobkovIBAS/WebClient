@@ -1,4 +1,4 @@
-import { CityData } from "./city";
+import { CityData } from "./city.interface";
 import { PossibleFlightDate } from "./possibleFlightDateInt";
 
 export interface PossibleFlights {
