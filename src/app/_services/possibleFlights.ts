@@ -1,11 +1,31 @@
 import { CityData } from "./city";
+import { PossibleFlightDate } from "./possibleFlightDateInt";
 
-export interface PossibleFlights {
-    id: string;
+export class PossibleFlightsData {
     fromId:CityData;
     toId: CityData;
     planeTypes: string;
-    freePlaces: number;
-    dateFlights: string;
-    sumTicket: number;
+    flightDate: PossibleFlightDate[];
+
+
+
+  constructor(
+    fromId: CityData, 
+    toId: CityData, 
+    planeTypes: string, 
+    flightDate: PossibleFlightDate[]
+) {
+    this.fromId = fromId
+    this.toId = toId
+    this.planeTypes = planeTypes
+    this.flightDate = flightDate
+  }
+    
+    
+    
+
+
+
+
+    
 }
