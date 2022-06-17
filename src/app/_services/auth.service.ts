@@ -20,7 +20,11 @@ export class AuthService {
       password
     }, httpOptions);
   }
-
+  refreshToken(token: string) {
+    return this.http.post(AUTH_API + 'refreshtoken', {
+      refreshToken: token
+    }, httpOptions);
+  }
   register(username: string, email: string, password: string): Observable<any> {
     return this.http.post(AUTH_API + 'signup', {
       username,

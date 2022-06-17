@@ -5,6 +5,34 @@
     <table class="table table-hover bg-white">
       <thead>
         <tr>
+          <th scope="col">Откуда</th>
+          <th scope="col">Куда</th>
+          <th scope="col">Дата полета</th>
+          <th scope="col">Поиск</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><select id="cityFrom" class="form-control" [(ngModel)]="cityFromValue" name="cityFromValue">
+            <option *ngFor="let city of cityTo" [value]="city?.id" >
+              {{city?.name}}
+          </option>
+          </select></td>
+          <td><select id="cityOut" class="form-control" [(ngModel)]="cityToValue" name="cityToValue">
+            <option *ngFor="let city of cityFrom" [value]="city?.id">
+              {{city?.name}}
+          </option>
+          </select>
+          </td>
+          <td><input type="date" id="time" class="form-control" [(ngModel)]="dateFlight"  name="dateFlights"></td>
+          <td><button type="submit" class="btn btn-warning btn-block" (click)="searchFlight()">Найти</button></td>
+      </tr>
+      </tbody>
+    </table>
+    <h4 class="text-center text-white" *ngIf="showSearchFlight">Найдено полетов</h4>
+    <table class="table table-hover bg-white" *ngIf="showSearchFlight">
+      <thead>
+        <tr>
           <th scope="col">#</th>
           <th scope="col">Откуда</th>
           <th scope="col">Куда</th>
@@ -25,13 +53,13 @@
           <td>{{ flight?.fromId?.name }}</td>
           <td>{{ flight?.toId?.name }}</td>
           <td>{{ flight?.planeTypes }}</td>
-          <td>{{ flight?.flightDate[0].freePlaces }}</td>
-          <td>{{ flight?.flightDate[0].dateFlight }}</td>
-          <td>{{ flight?.flightDate[0].sumTicket }}</td>-->
+          <td>{{ flight?.freePlaces }}</td>
+          <td>{{ flight?.dateFlight }}</td>
+          <td>{{ flight?.sumTicket }}</td>
       </tr>
       </tbody>
     </table>
-    <button type="submit" class="btn btn-warning btn-block" (click)="selectFligth()">Выбрать</button>
+    <button type="submit" class="btn btn-warning btn-block" *ngIf="showSearchFlight" (click)="selectFligth()">Выбрать</button>
   </div>
 </div>
 <div class="container pt-5" *ngIf="showRegistartionFlight">

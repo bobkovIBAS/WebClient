@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 
@@ -8,6 +11,9 @@ import { TokenStorageService } from '../_services/token-storage.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  activeMessage=false;
+  filter$: Observable<string>;
+  active:string;
   form: any = {
     username: null,
     password: null
@@ -17,9 +23,19 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService, 
+    private tokenStorage: TokenStorageService, 
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.filter$ = this.route.queryParamMap.pipe(
+      map((params: ParamMap) => params.get('activeMessage')),
+    );
+    this.filter$.subscribe(param =>{ 
+      if(param=='true'){
+        this.activeMessage=true
+      } 
+    });
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;

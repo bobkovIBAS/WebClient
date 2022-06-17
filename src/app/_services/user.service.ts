@@ -7,6 +7,7 @@ import { FlightData } from './flightsData';
 import { CityData } from './city.interface';
 import { PossibleFlightsData } from './possibleFlights';
 import { City } from './city.model';
+import { SearchFlight } from './search.model';
 
 const API_URL = 'http://localhost:8080/api/user/';
 const API_ADMIN = 'http://localhost:8080/api/admin/';
@@ -19,6 +20,9 @@ export class UserService {
 
   getPublicContent(): Observable<PossibleFlights[]> {
     return this.http.get<PossibleFlights[]>(API_URL + 'getAllPossibleFlights');
+  }
+  getSearchPossibleFlight(search:SearchFlight):Observable<any>{
+    return  this.http.post(API_URL+"searchflight", search);
   }
   createPossibleFlight(possibleFlight:PossibleFlightsData):Observable<any>{
     return this.http.post(API_ADMIN+"newflight/", possibleFlight);
