@@ -8,11 +8,14 @@
       <li class="nav-item">
         <a href="/myflights" *ngIf="isLoggedIn" class="nav-link" routerLink="myflights">Мои полеты </a>
       </li>
-      <li class="nav-item"> <!--*ngIf="showAdminBoard"-->
+      <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/createflight" class="nav-link" routerLink="adminflight">Создать полеты</a>
       </li>
-      <li class="nav-item"> <!--*ngIf="showAdminBoard"-->
+      <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/createcity" class="nav-link" routerLink="admincity">Создать город</a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/allflight" class="nav-link" routerLink="allflight">Все полеты</a>
       </li>
       <li class="nav-item" *ngIf="showModeratorBoard">
         <a href="/mod" class="nav-link" routerLink="mod">Модератор панель</a>

@@ -6,6 +6,8 @@ export interface PossibleFlights {
     fromId:CityData;
     toId: CityData;
     planeTypes: string;
-    flightDate: PossibleFlightDate[]; 
+    dateFlight:Date;
+    freePlaces:number;
+    sumTicket:number;
 
 }

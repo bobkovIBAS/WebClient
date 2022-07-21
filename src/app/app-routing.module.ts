@@ -11,6 +11,7 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { FlightComponent } from './flights/flights.component';
 import { BoardAdminCityComponent } from './board-admin-city/boad-admin-city.component';
 import { AuthGuard } from './_services/auth.active';
+import { BoardAdminFlight } from './board-admin-flight/board-admin-flight.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'mod', component: BoardModeratorComponent, canActivate:[AuthGuard] },
   { path: 'adminflight', component: BoardAdminComponent, canActivate:[AuthGuard] },
   { path: 'admincity', component: BoardAdminCityComponent, canActivate:[AuthGuard] },
+  { path: 'allflight', component: BoardAdminFlight, canActivate:[AuthGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

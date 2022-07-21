@@ -1,6 +1,7 @@
 import { Component, Injectable, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
+import { GuestCard } from '../_services/guestCard';
 
 import { CreateUser } from '../_services/guestcard-create';
 import { PossibleFlights } from '../_services/possibleFlightInterface';
@@ -19,9 +20,12 @@ import { UserService } from '../_services/user.service';
 export class HomeComponent implements OnInit {
   public flightData: PossibleFlights[];
   public saveLocal: CreateUser[];
+  public guestCard: GuestCard[];
+  public saveflightData: PossibleFlights;
   content?: string;
   showRegistartionFlight= false;
   showRegistartionFlightDone=false;
+  showRegistartionFlightGuestCard=false;
   showStaticText=true;
   selected={id:'',};
   loginForm: CreateUser = {
@@ -42,12 +46,25 @@ export class HomeComponent implements OnInit {
     err => {
       this.content = JSON.parse(err.error).message;
     });
+
+    this.userService.getGuestCardAll().subscribe((data:GuestCard[])=>{
+      this.guestCard = data;
+    },
+    err => {
+      this.content = JSON.parse(err.error).message;
+    });
   }
 
   selectFligth(): void{
     if(this.selected.id.length>0){
-      this.showRegistartionFlight = true;
-      this.showStaticText=false;
+      if(this.guestCard!=null){
+        this.showStaticText=false;
+        this.showRegistartionFlightGuestCard=true;
+      } else{
+        this.showRegistartionFlight = true;
+        this.showStaticText=false;
+      }
+      
     }
   }
   
@@ -57,12 +74,39 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  createFlightData(){
+  addNewPassengers(){
+    if(this.showRegistartionFlight == false){
+      this.showRegistartionFlight=true;
+      this.showRegistartionFlightGuestCard=false;
+    } else{
+      this.showRegistartionFlight=false;
+      this.showRegistartionFlightGuestCard=true;
+    }
+  }
+
+  createFlightData():void{
     if(this.tokenStorage.getToken()!=null){
-      this.userService.saveFlightData(this.selected.id,this.loginForm).subscribe(
+      this.userService.saveFlightData(this.selected.id,
+        this.loginForm).subscribe(
         (data: any) => {
           this.showRegistartionFlight=false;
           this.showRegistartionFlightDone = true;
+          this.showStaticText=false;
+        },
+        error => console.log(error));
+    } else{
+      this.router.navigate(['login']);
+    }
+
+  } 
+  createFlightDataWithGuestCard(id:string){
+    if(this.tokenStorage.getToken()!=null){
+      this.userService.saveFlightDataNew(this.selected.id,
+        this.guestCard.find(i=>i.id==id)).subscribe(
+        (data: any) => {
+          this.showRegistartionFlight=false;
+          this.showRegistartionFlightDone = true;
+          this.showRegistartionFlightGuestCard=false;
           this.showStaticText=false;
         },
         error => console.log(error));

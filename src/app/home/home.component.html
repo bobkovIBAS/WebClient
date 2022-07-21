@@ -25,9 +25,9 @@
           <td>{{ flight?.fromId?.name }}</td>
           <td>{{ flight?.toId?.name }}</td>
           <td>{{ flight?.planeTypes }}</td>
-          <td>{{ flight?.flightDate[0].freePlaces }}</td>
-          <td>{{ flight?.flightDate[0].dateFlight }}</td>
-          <td>{{ flight?.flightDate[0].sumTicket }}</td>-->
+          <td>{{ flight?.freePlaces }}</td>
+          <td>{{ flight?.dateFlight }}</td>
+          <td>{{ flight?.sumTicket }}</td>
       </tr>
       </tbody>
     </table>
@@ -58,10 +58,33 @@
 </div>
 <div class="container pt-5" *ngIf="showRegistartionFlightDone">
   <h5 class="text-center">Вы успешно зарегестрировались на полет</h5>
-  <p>Откуда</p>
-  <p>Куда</p>
-  <p>Самолет</p>
-  <p>Дата полета</p>
+    <p>Откуда</p>
+    <p>Куда</p>
+    <p>Самолет</p>
+    <p>Дата полета</p>
 </div>
+<ng-container *ngIf="showRegistartionFlightGuestCard">
+  <div class="container pt-5">
+    <button type="submit" class="btn btn-primary btn-block" (click)="addNewPassengers()">Добавить пассажира</button>
+  </div>
+  <div class="container pt-5 card-group">
+    <ng-container *ngFor="let gc of guestCard; index as i">
+      <div class="card mb-3 " style="max-width: 540px;" >
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="assets/image/faces.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Пассажир: {{ gc?.surname }} {{ gc?.name }}</h5>
+              <p class="card-text"> Паспорт: {{ gc?.passport }}</p>
+              <p class="card-text"><small class="text-muted"> <button type="submit" class="btn btn-primary" (click)="createFlightDataWithGuestCard(gc.id)">Выбрать</button> </small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
 
 

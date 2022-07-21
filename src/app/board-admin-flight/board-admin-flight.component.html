@@ -1,0 +1,33 @@
+<div class="container">
+    <header class="jumbotron">
+        <table class="table table-hover bg-white">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Пассажир</th>
+                <th scope="col">Откуда</th>
+                <th scope="col">Куда</th>
+                <th scope="col">Самолет</th>
+                <th scope="col">Дата полета</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let flight of flightData; index as i">
+                <th scope="row">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    [value]="flight?.id">
+                  </div>
+                </th>
+                <td>{{ flight?.guestCard.surname}} {{ flight?.guestCard.name}}</td>
+                <td>{{ flight?.possibleFlights?.fromId?.name }}</td>
+                <td>{{ flight?.possibleFlights?.toId?.name }}</td>
+                <td>{{ flight?.possibleFlights?.planeTypes }}</td>
+                <td>{{ flight?.possibleFlights?.dateFlights }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-warning btn-block">Выбрать</button>
+    </header>
+  </div>
+  

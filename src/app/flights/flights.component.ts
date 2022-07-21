@@ -2,6 +2,7 @@ import { Component, Injectable, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { timer } from "rxjs/internal/observable/timer";
 import { FlightData } from "../_services/flightsData";
+import { GuestCard } from "../_services/guestCard";
 import { UserService } from "../_services/user.service";
 
 @Component({
@@ -15,6 +16,7 @@ import { UserService } from "../_services/user.service";
   })
   export class FlightComponent implements OnInit{
     public flightData: FlightData[];
+    public guestCard:GuestCard[];
     selected={id:'',};
     activeMessage=false;
     constructor(private userService: UserService, private router: Router) { }
@@ -22,6 +24,13 @@ import { UserService } from "../_services/user.service";
     ngOnInit(): void {
       this.userService.getFlightData().subscribe((data:FlightData[])=>{
         this.flightData = data;
+      },
+      err => {
+        console.log(JSON.parse(err.error).message);
+      });
+
+      this.userService.getGuestCardAll().subscribe((data:GuestCard[])=>{
+        this.guestCard = data;
       },
       err => {
         console.log(JSON.parse(err.error).message);
