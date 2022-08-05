@@ -58,10 +58,10 @@
 </div>
 <div class="container pt-5" *ngIf="showRegistartionFlightDone">
   <h5 class="text-center">Вы успешно зарегестрировались на полет</h5>
-    <p>Откуда</p>
-    <p>Куда</p>
-    <p>Самолет</p>
-    <p>Дата полета</p>
+    <p>Откуда: {{createFlight.toId.name}}</p>
+    <p>Куда: {{createFlight.fromId.name}}</p>
+    <p>Самолет: {{createFlight.planeTypes}}</p>
+    <p>Дата полета: {{createFlight.dateFlight}}</p>
 </div>
 <ng-container *ngIf="showRegistartionFlightGuestCard">
   <div class="container pt-5">

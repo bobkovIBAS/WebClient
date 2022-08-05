@@ -15,20 +15,13 @@ import { UserService } from "../_services/user.service";
     providedIn: 'root'
   })
   export class FlightComponent implements OnInit{
-    public flightData: FlightData[];
+    public flightDataDao: FlightData[];
     public guestCard:GuestCard[];
     selected={id:'',};
     activeMessage=false;
     constructor(private userService: UserService, private router: Router) { }
 
     ngOnInit(): void {
-      this.userService.getFlightData().subscribe((data:FlightData[])=>{
-        this.flightData = data;
-      },
-      err => {
-        console.log(JSON.parse(err.error).message);
-      });
-
       this.userService.getGuestCardAll().subscribe((data:GuestCard[])=>{
         this.guestCard = data;
       },
@@ -41,6 +34,15 @@ import { UserService } from "../_services/user.service";
       if(event.target.checked){
         this.selected.id=event.target.value;
       }
+    }
+
+    flightDataWithGuestCard(id:string){
+      this.userService.getFlightDataWith(this.guestCard.find(i=>i.id==id)).subscribe((data:FlightData[])=>{
+        this.flightDataDao = data;
+      },
+      err => {
+        console.log(JSON.parse(err.error).message);
+      });
     }
 
     selectFligth(){

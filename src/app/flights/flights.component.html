@@ -3,6 +3,24 @@
         Забронированный полет удален
     </div>
   <div class="container">
+    <div class="container pt-5 card-group">
+      <ng-container *ngFor="let gc of guestCard; index as i">
+        <div class="card mb-3 " style="max-width: 540px;" >
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="assets/image/faces.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Пассажир: {{ gc?.surname }} {{ gc?.name }}</h5>
+                <p class="card-text"> Паспорт: {{ gc?.passport }}</p>
+                <p class="card-text"><small class="text-muted"> <button type="submit" class="btn btn-primary" (click)="flightDataWithGuestCard(gc.id)">Посмотреть полет</button> </small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
     <h4 class="text-center">Мои полеты</h4>
     <table class="table table-hover bg-white">
       <thead>
@@ -16,18 +34,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let flight of flightData; index as i">
-          <th scope="row">
+        <tr *ngFor="let flight of flightDataDao; index as i">
+          <td scope="row">
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-              (change)="onCheckChange($event)" [value]="flight?.id">
+              (change)="onCheckChange($event)" [value]="flight.id">
             </div>
-          </th>
-          <td>{{ flight?.guestCard.surname}} {{ flight?.guestCard.name}}</td>
-          <td>{{ flight?.possibleFlights?.fromId?.name }}</td>
-          <td>{{ flight?.possibleFlights?.toId?.name }}</td>
-          <td>{{ flight?.possibleFlights?.planeTypes }}</td>
-          <!--<td>{{ flight?.possibleFlights?.dateFlights }}</td>-->
+          </td>
+          <td>{{ flight.guestCard.surname}} {{ flight.guestCard.name}}</td>
+          <td>{{ flight.fromId.name }}</td>
+          <td>{{ flight.toId.name }}</td>
+          <td>{{ flight.planeTypes }}</td>
+          <td>{{ flight.dateFlight }}</td>
       </tr>
       </tbody>
     </table>
